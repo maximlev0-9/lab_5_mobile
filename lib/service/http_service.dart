@@ -8,7 +8,6 @@ class HttpService {
   };
 
   static Future<http.Response> getRequest() async {
-    print("called http method");
     http.Response response;
 
     final url = Uri.parse(baseUrl);
@@ -17,7 +16,6 @@ class HttpService {
     } on Exception catch (e) {
       throw e;
     }
-    print("returned http response");
     return response;
   }
 }

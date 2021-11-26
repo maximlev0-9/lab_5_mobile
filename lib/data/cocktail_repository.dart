@@ -7,15 +7,13 @@ class CocktailRepository{
   Future<CocktailReceipt> getRandomCocktail() async {
     try {
       final response = await HttpService.getRequest();
-      print("in repo after response");
       print(response.body);
+      print(response.statusCode);
       if(response.statusCode == 200){
-        print("before converting ");
         final result = cocktailReceiptFromJson(response.body);
-        print("in repo before returning response");
         return result;
-      }else{
-        return null;
+      } else {
+        throw Exception("Failed to retrieve data.");
       }
     } on SocketException catch (e) {
       throw e;

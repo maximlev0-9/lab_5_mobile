@@ -17,18 +17,17 @@ class CocktailBloc extends Bloc<CocktailEvent, CocktailState> {
   Stream<CocktailState> mapEventToState(
       CocktailEvent event,
   ) async* {
-    print("before all");
     if (event is GetCocktail) {
       try {
         yield CocktailLoading();
-        print("before await");
         final cocktail = await _cocktailRepository.getRandomCocktail();
-        print("after await");
         yield CocktailLoaded(cocktail);
         yield CocktailInitial();
       } on Exception {
         yield CocktailError("Couldn't fetch cocktail. Is the device online?");
       }
+    } else if (event is BackFromError) {
+      yield CocktailInitial();
     }
   }
 }

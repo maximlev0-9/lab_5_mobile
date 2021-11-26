@@ -32,7 +32,6 @@ class _HomeState extends State<Home> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-
             Column(
               children: [
                 Container(
@@ -42,7 +41,8 @@ class _HomeState extends State<Home> {
                       bloc.add(GetCocktail());
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: Colors.green, padding: const EdgeInsets.all(16)),
+                        primary: Colors.green,
+                        padding: const EdgeInsets.all(16)),
                     child: Text("Get random cocktail receipt"),
                   ),
                 ),
@@ -59,7 +59,8 @@ class _HomeState extends State<Home> {
                           ));
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: Colors.green, padding: const EdgeInsets.all(16)),
+                        primary: Colors.green,
+                        padding: const EdgeInsets.all(16)),
                     child: Text("View All Liked Receipts"),
                   ),
                 ),
@@ -81,12 +82,21 @@ class _HomeState extends State<Home> {
     return Center(child: CircularProgressIndicator());
   }
 
-  getErrorWidget(message) {
-    return Center(
-        child: Text(
-      message,
-      style: TextStyle(color: Colors.black),
-    ));
+  getErrorWidget(message, bloc) {
+    return Container(
+      alignment: Alignment.center,
+      child: GestureDetector(
+          onTap: () {
+            bloc.add(BackFromError());
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 150, horizontal: 100),
+            child: Text(
+              message,
+              style: TextStyle(color: Colors.black),
+            ),
+          )),
+    );
   }
 
   likeCocktail(CocktailReceipt cocktail) {
@@ -106,7 +116,6 @@ class _HomeState extends State<Home> {
     return BlocListener(
         listener: (context, state) {
           if (state is CocktailLoaded && state.cocktail != null) {
-            print("lol, you fucked up!");
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) {
@@ -122,7 +131,7 @@ class _HomeState extends State<Home> {
               child: bloc.state is CocktailLoading
                   ? getLoadingWidget()
                   : bloc.state is CocktailError
-                      ? getErrorWidget("Some Error")
+                      ? getErrorWidget("Some Error", bloc)
                       : bloc.state is CocktailInitial
                           ? getMainPage(context)
                           : Container(
