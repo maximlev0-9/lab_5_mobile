@@ -6,6 +6,8 @@ This app allows you to get receipt for a random cocktail (mostly with some alcoh
 public API "CocktailDB". Also you can like any of those receipts and save them in your list of liked
 cocktails.
 
+In order to use my app please insert valid API key into variable "apikey" in lib/service/http_service.dart
+
 Please, don't make too much requests or my account will be blocked :(
 
 Here are the screenshots of this app:

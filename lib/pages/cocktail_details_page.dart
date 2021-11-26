@@ -28,6 +28,7 @@ class _CocktailDetailsState extends State<CocktailDetails> {
         child: Column(
           children: [
             Container(
+              width: MediaQuery.of(context).size.width / 2,
               child: Image(
                 image: NetworkImage(widget.cocktail.drinkImage),
                 fit: BoxFit.cover,
@@ -39,7 +40,7 @@ class _CocktailDetailsState extends State<CocktailDetails> {
             Center(
               child: Text(
                 "Ingredients",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 20),
               ),
             ),
             Column(
@@ -59,6 +60,7 @@ class _CocktailDetailsState extends State<CocktailDetails> {
             SizedBox(
               height: 20,
             ),
+            Text("Instructions", style: TextStyle(fontSize: 20)),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Text(
